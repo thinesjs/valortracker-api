@@ -45,10 +45,11 @@ class Authentication {
         }
     }
 
-    public function reAuth($ssid){
+    public function reAuth(){
+        if (!isset($_COOKIE["ssid"]) ) return;
         $utils = new Utils();
         $reauth = CookieJar::fromArray([
-            'ssid' => $ssid
+            'ssid' => $_COOKIE["ssid"]
         ], 'auth.riotgames.com');
 
         $authResponse = $this->client->request("GET","https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1&scope=account%20openid", ["cookies"=>$reauth, "allow_redirects"=>false]);
@@ -58,7 +59,11 @@ class Authentication {
         $this->shard = $this->getRegion($this->accessToken);
         $entitlement = $this->getEntitlements($this->accessToken);
 
-        return array("access_token"=>$this->accessToken, "entitlements_token"=>$entitlement,);
+        session(['accessToken' => $this->accessToken]);
+        session(['entitlements_token' => $entitlement]);
+        session(['shard' => $this->shard]);
+
+        return array("accessToken"=>$this->accessToken, "entitlements_token"=>$entitlement,);
     }
 
     public function collectCookies(){
@@ -79,26 +84,31 @@ class Authentication {
         if(isset(json_decode((string) $response->getBody(),true)["error"])) return json_decode((string) $response->getBody());
         if (json_decode((string)$response->getBody())->type == "multifactor")
         {
-            $multiFactorAlert = array(
-                "type"=> "2FA",
-                "asid"=>$session->getCookieByName("asid")->getValue());
-            return $multiFactorAlert;
+            setcookie("asid",$session->getCookieByName("asid")->getValue(),$session->getCookieByName("asid")->getExpires(), "/");
+
+            return "2FA";
         }
-
-        $this->ssid = $session->getCookieByName("ssid")->getValue();
-        $this->csid = $session->getCookieByName("csid")->getValue();
-        $this->clid = $session->getCookieByName("clid")->getValue();
-
+        //2FA
+        if($this->remember){
+            setcookie("csid",$session->getCookieByName("csid")->getValue(),$session->getCookieByName("csid")->getExpires(), "/");
+            setcookie("clid",$session->getCookieByName("clid")->getValue(),$session->getCookieByName("clid")->getExpires(), "/");
+            setcookie("ssid",$session->getCookieByName("ssid")->getValue(),$session->getCookieByName("ssid")->getExpires(), "/");
+            setcookie("shard",$this->shard,$session->getCookieByName("ssid")->getExpires(), "/");
+            $this->ssid = $session->getCookieByName("ssid")->getValue();
+            $this->csid = $session->getCookieByName("csid")->getValue();
+            $this->clid = $session->getCookieByName("clid")->getValue();
+        }
 
         $this->accessToken = $utils->getBetween("access_token=","&scope",(string)$response->getBody());
         $this->idToken = $utils->getBetween("id_token=","&token_type",(string)$response->getBody());
+        //dd(json_decode((string)$response->getBody()));
         return $this->accessToken;
     }
 
-    public function requestMfa($code, $asid)
+    public function requestMfa($code)
     {
         $cookieJar = CookieJar::fromArray([
-            'asid' => $asid
+            'asid' => $_COOKIE['asid']
         ], 'auth.riotgames.com');
 
         $utils = new Utils();
@@ -106,11 +116,17 @@ class Authentication {
         $putData = json_decode('{"type":"multifactor", "code":"'.$code.'", "rememberDevice":true}');
         $mfaResponse = $this->client->request("PUT","https://auth.riotgames.com/api/v1/authorization",["json"=>$putData, "cookies"=>$cookieJar, "headers"=>$this->headers]);
         if(isset(json_decode((string) $mfaResponse->getBody(),true)["error"])) return json_decode((string) $mfaResponse->getBody());
-
-        $this->ssid = $cookieJar->getCookieByName("ssid")->getValue();
-        $this->csid = $cookieJar->getCookieByName("csid")->getValue();
-        $this->clid = $cookieJar->getCookieByName("clid")->getValue();
-
+        setcookie("ssid",$cookieJar->getCookieByName("ssid")->getValue(),$cookieJar->getCookieByName("ssid")->getExpires(), "/");
+        setcookie("shard",$this->shard,$cookieJar->getCookieByName("ssid")->getExpires(), "/");
+        if($this->remember){
+            setcookie("csid",$cookieJar->getCookieByName("csid")->getValue(),$cookieJar->getCookieByName("csid")->getExpires(), "/");
+            setcookie("clid",$cookieJar->getCookieByName("clid")->getValue(),$cookieJar->getCookieByName("clid")->getExpires(), "/");
+            setcookie("ssid",$cookieJar->getCookieByName("ssid")->getValue(),$cookieJar->getCookieByName("ssid")->getExpires(), "/");
+            setcookie("shard",$this->shard,$cookieJar->getCookieByName("ssid")->getExpires(), "/");
+            $this->ssid = $cookieJar->getCookieByName("ssid")->getValue();
+            $this->csid = $cookieJar->getCookieByName("csid")->getValue();
+            $this->clid = $cookieJar->getCookieByName("clid")->getValue();
+        }
         $this->accessToken = $utils->getBetween("access_token=","&scope",(string)$mfaResponse->getBody());
         $this->idToken = $utils->getBetween("id_token=","&token_type",(string)$mfaResponse->getBody());
         return $this->accessToken;
@@ -128,21 +144,19 @@ class Authentication {
         return json_decode((string)$response->getBody())->affinities->live;
     }
 
-    public function authenticate($mfa = false, $code = 0, $asid = null){
+    public function authenticate($mfa = false, $code = 0){
         $this->collectCookies();
         if (!$mfa)
         {
             $authSession = $this->authUser();
+            if ($authSession == "2FA") return "2FA";
         }else
         {
-            $authSession = $this->requestMfa($code, $asid);
+            $authSession = $this->requestMfa($code);
         }
         if(isset($authSession->error)){
             if($authSession->error == "auth_failure") return "{\"error\":\"Invalid username or password\"}";
             return "{\"error\":\"".$authSession->error."\"}";
-        }
-        if(isset($authSession['type'])){
-            if ($authSession['type'] == "2FA") return $authSession;
         }
         $region = $this->getRegion($this->accessToken);
         $entitlement = $this->getEntitlements($this->accessToken);
@@ -154,6 +168,9 @@ class Authentication {
             $returnArr["csid"] = $this->csid;
             $returnArr["clid"] = $this->clid;
         }
+        session(['accessToken' => $this->accessToken]);
+        session(['entitlements_token' => $entitlement]);
+        session(['shard' => $region]);
         return $returnArr;
     }
 // AUTH END //

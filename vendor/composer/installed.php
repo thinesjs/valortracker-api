@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '4db03162b0ae54b53395afdedc997f25a272f923',
+        'reference' => '2baca3df87d9c155c0edf8ec09808a71c631591d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -373,7 +373,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4db03162b0ae54b53395afdedc997f25a272f923',
+            'reference' => '2baca3df87d9c155c0edf8ec09808a71c631591d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -398,9 +398,9 @@
             'dev_requirement' => true,
         ),
         'laravel/sanctum' => array(
-            'pretty_version' => 'v3.2.4',
-            'version' => '3.2.4.0',
-            'reference' => 'c8269dcff3cda261ce113ab9548a0253d709aa91',
+            'pretty_version' => 'v3.2.5',
+            'version' => '3.2.5.0',
+            'reference' => '8ebda85d59d3c414863a7f4d816ef8302faad876',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/sanctum',
             'aliases' => array(),
@@ -715,8 +715,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -822,9 +822,9 @@
             'dev_requirement' => true,
         ),
         'sebastian/diff' => array(
-            'pretty_version' => '5.0.1',
-            'version' => '5.0.1.0',
-            'reference' => 'aae9a0a43bff37bd5d8d0311426c87bf36153f02',
+            'pretty_version' => '5.0.3',
+            'version' => '5.0.3.0',
+            'reference' => '912dc2fbe3e3c1e7873313cc801b100b6c68c87b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/diff',
             'aliases' => array(),

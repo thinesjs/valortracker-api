@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit91db1e3edf088da3d20412b94fb74cca
+class ComposerStaticInit53e618bb4d8b1937e527e3aefa7b11fb
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -345,8 +345,8 @@ class ComposerStaticInit91db1e3edf088da3d20412b94fb74cca
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -6256,7 +6256,6 @@ class ComposerStaticInit91db1e3edf088da3d20412b94fb74cca
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
         'Thinesjs\\ValorAuth\\Authentication' => __DIR__ . '/..' . '/thinesjs/valor-auth/src/Authentication.php',
         'Thinesjs\\ValorAuth\\Utils' => __DIR__ . '/..' . '/thinesjs/valor-auth/src/Utils.php',
-        'Thinesjs\\ValorAuth\\ValorHelper' => __DIR__ . '/..' . '/thinesjs/valor-auth/src/ValorHelper.php',
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',
@@ -6295,10 +6294,10 @@ class ComposerStaticInit91db1e3edf088da3d20412b94fb74cca
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit91db1e3edf088da3d20412b94fb74cca::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit91db1e3edf088da3d20412b94fb74cca::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit91db1e3edf088da3d20412b94fb74cca::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit91db1e3edf088da3d20412b94fb74cca::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit53e618bb4d8b1937e527e3aefa7b11fb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit53e618bb4d8b1937e527e3aefa7b11fb::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit53e618bb4d8b1937e527e3aefa7b11fb::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit53e618bb4d8b1937e527e3aefa7b11fb::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -5752,7 +5752,6 @@ return array(
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
     'Thinesjs\\ValorAuth\\Authentication' => $vendorDir . '/thinesjs/valor-auth/src/Authentication.php',
     'Thinesjs\\ValorAuth\\Utils' => $vendorDir . '/thinesjs/valor-auth/src/Utils.php',
-    'Thinesjs\\ValorAuth\\ValorHelper' => $vendorDir . '/thinesjs/valor-auth/src/ValorHelper.php',
     'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',
