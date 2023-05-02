@@ -1,8 +1,6 @@
 <p align="center"><a href="https://valortracker.xyz" target="_blank"><img src="https://valortracker.xyz/images/logo.png" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<h3>ValorTracker API</h3>
-</p>
+<h3 align="center">ValorTracker API</h3>
 
 ## ValorTracker API
 
