@@ -13,7 +13,7 @@ Development preview is available at <a href="https://dev.valortracker.xyz" targe
 ## Disclaimer
 This project is isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
 
-This project was created under Riot Games' "Legal Jibber Jabber".
+This project was created under <a href="https://www.riotgames.com/en/legal" target="_blank">Riot Games' "Legal Jibber Jabber"</a>.
 
 ## License
 
