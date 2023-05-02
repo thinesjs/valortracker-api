@@ -18,10 +18,23 @@ use App\Http\Controllers\RiotAPIController;
 Route::get('/', function () {
     return "ValorAuth - API for (v2.valortracker.xyz)";
 });
+
+//AUTH
 Route::post('/login', [RiotAPIController::class, 'handleLogin']);
 Route::post('/2fa', [RiotAPIController::class, 'handle2fa']);
 Route::post('/reauth', [RiotAPIController::class, 'handleRecookie']);
+
+//GET
 Route::get('/profile', [RiotAPIController::class, 'getUserInfo']);
 Route::get('/store/{puuid}/{region}', [RiotAPIController::class, 'getStorefront']);
 Route::get('/wallet/{puuid}/{region}', [RiotAPIController::class, 'getWallet']);
 Route::get('/penalties/{region}', [RiotAPIController::class, 'getPenalties']);
+Route::get('/mmr/{puuid}/{region}', [RiotAPIController::class, 'getMMR']);
+Route::get('/match-history/{puuid}/{region}', [RiotAPIController::class, 'getMatchHistory']);
+Route::get('/match/{matchId}//{region}', [RiotAPIController::class, 'getMatchDetails']);
+Route::get('/pregame/{puuid}/{region}', [RiotAPIController::class, 'getPregame']);
+Route::get('/pregame/{matchId}/{region}', [RiotAPIController::class, 'getPregameMatch']);
+
+//POST
+Route::post('/pregame/{matchId}/select/{agentId}/{region}', [RiotAPIController::class, 'selectPregameAgent']);
+Route::post('/pregame/{matchId}/lock/{agentId}/{region}', [RiotAPIController::class, 'lockPregameAgent']);

@@ -173,6 +173,8 @@ class RiotAPIController extends Controller
     {
         $storeFront = $this->valorClient->storefront();
 
+        if(isset($storeFront->errorCode) && $storeFront->errorCode =="BAD_CLAIMS") return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+
         $weaponDisplayNames = array();
         foreach($storeFront->SkinsPanelLayout->SingleItemOffers as $i) {
             $weaponDisplayNames[] = $this->utils->getWeaponName($i);
@@ -200,5 +202,47 @@ class RiotAPIController extends Controller
     {
         $penalties = $this->valorClient->penalties();
         if(!empty($penalties) && !isset($penalties->error)) return response()->json(['status' => 'success', 'data' => $penalties], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function getMMR(Request $request): JsonResponse
+    {
+        $mmr = $this->valorClient->mmr();
+        if(!empty($mmr) && !isset($mmr->error)) return response()->json(['status' => 'success', 'data' => $mmr], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function getMatchHistory(Request $request): JsonResponse
+    {
+        $matchHistory = $this->valorClient->matchHistory();
+        if(!empty($matchHistory) && !isset($matchHistory->error)) return response()->json(['status' => 'success', 'data' => $matchHistory], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function getMatchDetails(Request $request): JsonResponse
+    {
+        $matchDetails = $this->valorClient->matchDetails($request->matchId);
+        if(!empty($matchDetails) && !isset($matchDetails->error)) return response()->json(['status' => 'success', 'data' => $matchDetails], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function getPregame(Request $request): JsonResponse
+    {
+        $preGame = $this->valorClient->preGamePlayer();
+        if(!empty($preGame) && !isset($preGame->error)) return response()->json(['status' => 'success', 'data' => $preGame], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function getPregameMatch(Request $request): JsonResponse
+    {
+        $preGameMatch = $this->valorClient->preGameMatch($request->matchId);
+        if(!empty($preGameMatch) && !isset($preGameMatch->error)) return response()->json(['status' => 'success', 'data' => $preGameMatch], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function selectPregameAgent(Request $request): JsonResponse
+    {
+        $preGameSelect = $this->valorClient->preGameSelectAgent($request->matchId, $request->agentId);
+        if(!empty($preGameSelect) && !isset($preGameSelect->error)) return response()->json(['status' => 'success', 'data' => $preGameSelect], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+    }
+
+    public function lockPregameAgent(Request $request): JsonResponse
+    {
+        $preGameLock = $this->valorClient->preGameLockAgent($request->matchId, $request->agentId);
+        if(!empty($preGameLock) && !isset($preGameLock->error)) return response()->json(['status' => 'success', 'data' => $preGameLock], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 }
