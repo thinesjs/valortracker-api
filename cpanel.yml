@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/tjsserve/public_html/valortracker.tjs-server.com
+    - export REPOPATH=/home/tjsserve/repositories/valortracker-api
+    - /bin/cp -R public/build $DEPLOYPATH
+    - /bin/cp -R public/images $DEPLOYPATH
