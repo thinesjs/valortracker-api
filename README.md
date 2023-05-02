@@ -8,7 +8,7 @@ ValorTracker API is an rest backend service for ValorTracker V2.
 
 ## Preview
 
-Development preview is available at <a href="https://v2.valortracker.xyz" target="_blank">ValorTracker V2</a>
+Development preview is available at <a href="https://v2.valortracker.xyz" target="_blank">ValorTracker V2</a>. The preview might show errors when visiting different pages and that's due to the server hitting its limits. It should eventually load after some time. 
 
 ## Disclaimer
 This project is isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
