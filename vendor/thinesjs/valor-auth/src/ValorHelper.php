@@ -15,7 +15,9 @@ class ValorHelper
     public $authUrl;
     public $playerDataUrl;
     public $gameDataUrl;
+    public $address;
     public $playerId;
+    public $shard;
 
     public function __construct($access_token = null, $shard = null, $entitlements = null, $puuid = null){
         $this->client = new Client(array('curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_3],'cookies' => true,'http_errors' => false, 'verify'=>false));
