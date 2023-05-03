@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['valortracker.xyz', '*.valortracker.xyz'],
+    'allowed_origins' => ['valortracker.xyz', 'v2.valortracker.xyz', '*.valortracker.xyz'],
 
     'allowed_origins_patterns' => [],
 
