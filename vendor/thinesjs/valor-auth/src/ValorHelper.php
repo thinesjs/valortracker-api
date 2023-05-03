@@ -18,7 +18,7 @@ class ValorHelper
     public $playerId;
 
     public function __construct($access_token = null, $shard = null, $entitlements = null, $puuid = null){
-        $this->client = new GuzzleHttp\Client(array('curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_3],'cookies' => true,'http_errors' => false, 'verify'=>false));
+        $this->client = new Client(array('curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_3],'cookies' => true,'http_errors' => false, 'verify'=>false));
         $this->headers = [
             "Accept-Encoding" => "gzip, deflate, br",
             'Content-Type' => 'application/json',
