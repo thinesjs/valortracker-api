@@ -4,6 +4,7 @@ namespace Thinesjs\ValorAuth;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
+use ErrorException;
 
 class ValorHelper
 {
@@ -50,7 +51,13 @@ class ValorHelper
     public function playerIdentity()
     {
         $response = $this->client->request("GET","$this->playerDataUrl/personalization/v2/players/$this->playerId/playerloadout", ["headers" => $this->headers]);
-        return json_decode((string)$response->getBody())->Identity;
+        try{
+            json_decode((string)$response->getBody())->Identity;
+            return json_decode((string)$response->getBody())->Identity;
+        }catch(ErrorException $ex){
+            return json_decode((string)$response->getBody());
+        }
+        
     }
 
     public function storefront()
