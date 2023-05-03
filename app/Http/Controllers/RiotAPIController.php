@@ -195,13 +195,13 @@ class RiotAPIController extends Controller
     public function getWallet(Request $request): JsonResponse
     {
         $walletBalance = $this->valorClient->wallet();
-        if(!empty($walletBalance) && !isset($walletBalance->error)) return response()->json(['status' => 'success', 'data' => $walletBalance], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($walletBalance) && !isset($walletBalance->errorCode)) return response()->json(['status' => 'success', 'data' => $walletBalance], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getPenalties(Request $request): JsonResponse
     {
         $penalties = $this->valorClient->penalties();
-        if(!empty($penalties) && !isset($penalties->error)) return response()->json(['status' => 'success', 'data' => $penalties], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($penalties) && !isset($penalties->errorCode)) return response()->json(['status' => 'success', 'data' => $penalties], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getMMR(Request $request): JsonResponse
@@ -213,7 +213,7 @@ class RiotAPIController extends Controller
     public function getMatchHistory(Request $request): JsonResponse
     {
         $matchHistory = $this->valorClient->matchHistory();
-        if(!empty($matchHistory) && !isset($matchHistory->error)) return response()->json(['status' => 'success', 'data' => $matchHistory], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($matchHistory) && !isset($matchHistory->errorCode)) return response()->json(['status' => 'success', 'data' => $matchHistory], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getMatchDetails(Request $request): JsonResponse

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RiotAPIController;
+use App\Http\Controllers\APIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::post('/2fa', [RiotAPIController::class, 'handle2fa']);
 Route::post('/reauth', [RiotAPIController::class, 'handleRecookie']);
 
 //GET
+Route::get('/version', [APIController::class, 'getVersion']);
 Route::get('/profile', [RiotAPIController::class, 'getUserInfo']);
 Route::get('/store/{puuid}/{region}', [RiotAPIController::class, 'getStorefront']);
 Route::get('/wallet/{puuid}/{region}', [RiotAPIController::class, 'getWallet']);
