@@ -166,7 +166,9 @@ class RiotAPIController extends Controller
     public function getUserInfo(Request $request): JsonResponse
     {
         $userInfo = $this->valorClient->userInfo();
-        if(!empty($userInfo) && !isset($userInfo->error)) return response()->json(['status' => 'success', 'data' => $userInfo], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        $userIdentity = $this->valorClient->playerIdentity();
+        
+        if(!empty($userInfo) && !isset($userInfo->error)) return response()->json(['status' => 'success', 'data' => $userInfo, 'identity' => $userIdentity], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getStorefront(Request $request): JsonResponse
@@ -207,7 +209,7 @@ class RiotAPIController extends Controller
     public function getMMR(Request $request): JsonResponse
     {
         $mmr = $this->valorClient->mmr();
-        if(!empty($mmr) && !isset($mmr->error)) return response()->json(['status' => 'success', 'data' => $mmr], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($mmr) && !isset($mmr->errorCode)) return response()->json(['status' => 'success', 'data' => $mmr], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getMatchHistory(Request $request): JsonResponse

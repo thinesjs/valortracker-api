@@ -27,7 +27,7 @@ Route::post('/reauth', [RiotAPIController::class, 'handleRecookie']);
 
 //GET
 Route::get('/version', [APIController::class, 'getVersion']);
-Route::get('/profile', [RiotAPIController::class, 'getUserInfo']);
+Route::get('/profile/{puuid}/{region}', [RiotAPIController::class, 'getUserInfo']);
 Route::get('/store/{puuid}/{region}', [RiotAPIController::class, 'getStorefront']);
 Route::get('/wallet/{puuid}/{region}', [RiotAPIController::class, 'getWallet']);
 Route::get('/penalties/{region}', [RiotAPIController::class, 'getPenalties']);

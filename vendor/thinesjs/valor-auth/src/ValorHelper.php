@@ -47,6 +47,12 @@ class ValorHelper
         return json_decode((string)$response->getBody());
     }
 
+    public function playerIdentity()
+    {
+        $response = $this->client->request("GET","$this->playerDataUrl/personalization/v2/players/$this->playerId/playerloadout", ["headers" => $this->headers]);
+        return json_decode((string)$response->getBody())->Identity;
+    }
+
     public function storefront()
     {
         $response = $this->client->request("GET","$this->playerDataUrl/store/v2/storefront/$this->playerId", ["headers" => $this->headers]);
