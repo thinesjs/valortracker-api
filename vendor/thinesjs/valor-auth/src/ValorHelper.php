@@ -103,7 +103,7 @@ class ValorHelper
             $roundsLost= 0;
 
             
-            
+            dd(json_decode($response2->getBody())->players);
             try{
                 foreach(json_decode($response2->getBody())->players as $player){
                     if($player->subject == $this->playerId){
@@ -111,7 +111,7 @@ class ValorHelper
                     }
                 }
             }catch(ErrorException $ex){
-                
+
             }
             
             
