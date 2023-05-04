@@ -216,7 +216,7 @@ class RiotAPIController extends Controller
     {
         $matchHistory = $this->valorClient->matchHistory();
         // dd($matchHistory);
-        if(!empty($matchHistory) && !isset($matchHistory['errorCode'])) return response()->json(['status' => 'success', 'data' => $matchHistory], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($matchHistory) && !isset($matchHistory->errorCode)) return response()->json(['status' => 'success', 'data' => $matchHistory], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getMatchDetails(Request $request): JsonResponse
