@@ -228,7 +228,7 @@ class RiotAPIController extends Controller
     public function getPregame(Request $request): JsonResponse
     {
         $preGame = $this->valorClient->preGamePlayer();
-        if(!empty($preGame) && !isset($preGame->errorCode)) return response()->json(['status' => 'success', 'data' => $preGame], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($preGame) && !isset($preGame->error)) return response()->json(['status' => 'success', 'data' => $preGame], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getPregameMatch(Request $request): JsonResponse
