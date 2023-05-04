@@ -33,7 +33,7 @@ Route::get('/wallet/{puuid}/{region}', [RiotAPIController::class, 'getWallet']);
 Route::get('/penalties/{region}', [RiotAPIController::class, 'getPenalties']);
 Route::get('/mmr/{puuid}/{region}', [RiotAPIController::class, 'getMMR']);
 Route::get('/match-history/{puuid}/{region}', [RiotAPIController::class, 'getMatchHistory']);
-Route::get('/match/{matchId}//{region}', [RiotAPIController::class, 'getMatchDetails']);
+Route::get('/match/{matchId}/{region}', [RiotAPIController::class, 'getMatchDetails']);
 Route::get('/pregame/{puuid}/{region}', [RiotAPIController::class, 'getPregame']);
 Route::get('/pregame/{matchId}/{region}', [RiotAPIController::class, 'getPregameMatch']);
 
