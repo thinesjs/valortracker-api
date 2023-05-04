@@ -91,55 +91,57 @@ class ValorHelper
         $final = array();
         
         $response = $this->client->request("GET","$this->playerDataUrl/match-history/v1/history/$this->playerId?startIndex=$startIndex&endIndex=$endIndex", ["headers" => $this->headers]);
-        foreach (json_decode($response->getBody())->History as $match) {
-            $tempData = array();
+        // foreach (json_decode($response->getBody())->History as $match) {
+        //     $tempData = array();
 
-            $playerTeam = null;
-            $playerWon = false;
+        //     $playerTeam = null;
+        //     $playerWon = false;
             
-            $roundsWon = 0;
-            $roundsLost= 0;
-
-            
-            $response2 = $this->client->request("GET","$this->playerDataUrl/match-details/v1/matches/$match->MatchID", ["headers" => $this->headers]);
-
-            foreach(json_decode($response2->getBody())->players as $player){
-                if($player->subject == $this->playerId){
-                    $playerTeam = $player->teamId;
-                }
-            }
-            $mapObj = new Utils;
-            $mapData = $mapObj->getMap(json_decode($response2->getBody())->matchInfo->mapId);
-
-            foreach(json_decode($response2->getBody())->teams as $team){
-                if($playerTeam == $team->teamId){
-                    $playerWon = $team->won;
-                    $roundsWon = $team->roundsWon;
-                    $roundsLost= $team->roundsPlayed - $team->roundsWon;
-                }
-            }
-
-            $tempData['matchId'] = json_decode($response2->getBody())->matchInfo->matchId;
-            $tempData['mapData'] = $mapData;
-            $tempData['queueID'] = json_decode($response2->getBody())->matchInfo->queueID;
-            $tempData['playerWon'] = $playerWon;
-            $tempData['roundsWon'] = $roundsWon;
-            $tempData['roundsLost'] = $roundsLost;
+        //     $roundsWon = 0;
+        //     $roundsLost= 0;
 
             
+        //     $response2 = $this->client->request("GET","$this->playerDataUrl/match-details/v1/matches/$match->MatchID", ["headers" => $this->headers]);
+
+        //     foreach(json_decode($response2->getBody())->players as $player){
+        //         if($player->subject == $this->playerId){
+        //             $playerTeam = $player->teamId;
+        //         }
+        //     }
+        //     $mapObj = new Utils;
+        //     $mapData = $mapObj->getMap(json_decode($response2->getBody())->matchInfo->mapId);
+
+        //     foreach(json_decode($response2->getBody())->teams as $team){
+        //         if($playerTeam == $team->teamId){
+        //             $playerWon = $team->won;
+        //             $roundsWon = $team->roundsWon;
+        //             $roundsLost= $team->roundsPlayed - $team->roundsWon;
+        //         }
+        //     }
+
+        //     $tempData['matchId'] = json_decode($response2->getBody())->matchInfo->matchId;
+        //     $tempData['mapData'] = $mapData;
+        //     $tempData['queueID'] = json_decode($response2->getBody())->matchInfo->queueID;
+        //     // $tempData['playedOn'] = json_decode($response2->getBody())->matchInfo->gameStartMillis;
+        //     $tempData['playerWon'] = $playerWon;
+        //     $tempData['roundsWon'] = $roundsWon;
+        //     $tempData['roundsLost'] = $roundsLost;
+
+            
 
 
-            array_push($final, $tempData);
-        }
-        $history = json_decode($response->getBody(), true);
-        unset($history['History']);
+        //     array_push($final, $tempData);
+        // }
+        // $history = json_decode($response->getBody(), true);
+        // unset($history['History']);
 
 
-        // $sub = array_merge($history, $surond);
-        $sub = $history;
-        $sub['Matches'] = $final;
+        // // $sub = array_merge($history, $surond);
+        // $sub = $history;
+        // $sub['Matches'] = $final;
 
-        return $sub;
+        // return $sub;
+        return json_decode((string)$response->getBody());
     }
 
     public function matchDetails($matchId)
