@@ -1,6 +1,7 @@
 <?php
 namespace Thinesjs\ValorAuth;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\File;
 
 class Utils {
     private $client;
@@ -31,8 +32,8 @@ class Utils {
         $mapDisplayName = null;
         $mapUUID = null;
 
-        $response = $this->client->request("GET","$this->baseUrl/maps");
-        foreach(json_decode($response->getBody())->data as $map){
+        $json = File::get('maps.json');
+        foreach(json_decode($json)->data as $map){
             if($map->mapUrl == $mapUrl){
                 $mapUUID = $map->uuid;
                 $mapDisplayName = $map->displayName;
