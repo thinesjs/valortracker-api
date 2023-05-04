@@ -134,7 +134,10 @@ class ValorHelper
         $history = json_decode($response->getBody(), true);
         unset($history['History']);
 
-        $sub = array_merge($history, $final);
+
+        // $sub = array_merge($history, $surond);
+        $sub = $history;
+        $sub['Matches'] = $final;
 
         return $sub;
     }
