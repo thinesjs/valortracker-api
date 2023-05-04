@@ -5,6 +5,7 @@ namespace Thinesjs\ValorAuth;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use ErrorException;
+use Illuminate\Support\Facades\File;
 
 class ValorHelper
 {
@@ -115,7 +116,8 @@ class ValorHelper
 
             }
             
-            
+            $json = File::get('maps.json');
+            dd($json);
             $mapData = $mapObj->getMap(json_decode($response2->getBody())->matchInfo->mapId);
 
             foreach(json_decode($response2->getBody())->teams as $team){
