@@ -43,4 +43,4 @@ Route::post('/pregame/{matchId}/lock/{agentId}/{region}', [RiotAPIController::cl
 
 //PROXY
 
-Route::post('/redirect/{path?}', 'Controller@redirectApi')->where('path', '.*');
+Route::get('/redirect/{path?}', 'Controller@redirectApi')->where('path', '.*');
