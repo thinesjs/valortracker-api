@@ -13,10 +13,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function addressApi($path, Request $request)
+    public function addressApi(Request $request)
     {
-        if (!Str::startsWith($path, '/')) $path = '/' . $path; // make sure it starts with /
-        $url = $path;
+        $url = $request->path;
         $postData = $request->all();
         $headers = [
             "Accept-Encoding" => "gzip, deflate, br",
