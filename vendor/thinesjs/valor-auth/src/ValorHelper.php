@@ -115,7 +115,7 @@ class ValorHelper
             }catch(ErrorException $ex){
 
             }
-            dd(($response2->getStatusCode()));
+            dd($response2->getBody());
             $mapData = $mapObj->getMap(json_decode($response2->getBody())->matchInfo->mapId);
 
             foreach(json_decode($response2->getBody())->teams as $team){
