@@ -209,7 +209,7 @@ class RiotAPIController extends Controller
     public function getMMR(Request $request): JsonResponse
     {
         $mmr = $this->valorClient->mmr();
-        if(!empty($mmr) && !isset($mmr->errorCode)) return response()->json(['status' => 'success', 'data' => $mmr], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
+        if(!empty($mmr) && !isset($mmr->error)) return response()->json(['status' => 'success', 'data' => $mmr], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
 
     public function getMatchHistory(Request $request): JsonResponse
