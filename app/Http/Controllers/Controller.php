@@ -32,7 +32,7 @@ class Controller extends BaseController
 
         $response = $client->request('GET', $url, ['json' => $postData, "headers"=>$headers]);
 
-        return response($response->getBody())->withHeaders($response->getHeaders());
+        return response($response->getBody());
     }
 
 }
