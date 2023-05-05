@@ -154,7 +154,7 @@ class ValorHelper
     public function matchDetails($matchId)
     {
         $response = $this->client->request("GET","$this->playerDataUrl/match-details/v1/matches/$matchId", ["headers" => $this->headers]);
-        return json_decode((string)$response->getBody());
+        return json_decode($response->getBody());
     }
 
     //END MATCHES
