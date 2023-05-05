@@ -43,5 +43,23 @@ class Utils {
         $tempData['mapUUID'] = $mapUUID;
         return $tempData;
     }
+
+    // public function getRankImage($tierId){
+    //     $tempData = array();
+    //     $mapDisplayName = null;
+    //     $mapUUID = null;
+
+    //     $json = File::get('ranks.json');
+    //     $ranks = json_decode($json)->data;
+    //     foreach($ranks[array_key_last($ranks)]->tiers as $tier){
+    //         if($tier->tier == $tierId){
+    //             $mapUUID = $map->uuid;
+    //             $mapDisplayName = $map->displayName;
+    //         }
+    //     }
+    //     $tempData['mapDisplayName'] = $mapDisplayName;
+    //     $tempData['mapUUID'] = $mapUUID;
+    //     return $tempData;
+    // }
 }
 ?>

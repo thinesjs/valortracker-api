@@ -38,6 +38,8 @@ Route::get('/match/{matchId}/{region}', [RiotAPIController::class, 'getMatchDeta
 Route::get('/pregame/{puuid}/{region}', [RiotAPIController::class, 'getPregame']);
 Route::get('/pregame/{matchId}/{region}', [RiotAPIController::class, 'getPregameMatch']);
 
+// Route::get('/rank/{tierId}', [RiotAPIController::class, 'getRankImage']);
+
 //POST
 Route::post('/pregame/{matchId}/select/{agentId}/{region}', [RiotAPIController::class, 'selectPregameAgent']);
 Route::post('/pregame/{matchId}/lock/{agentId}/{region}', [RiotAPIController::class, 'lockPregameAgent']);

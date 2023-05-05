@@ -8,7 +8,13 @@ ValorTracker API is an rest backend service for ValorTracker V2.
 
 ## Preview
 
-Development preview is available at <a href="https://v2.valortracker.xyz" target="_blank">ValorTracker V2</a>. The preview might show errors when visiting different pages and that's due to the server hitting its limits. It should eventually load after some time. 
+Development preview is available at <a href="https://v2.valortracker.xyz" target="_blank">ValorTracker V2</a>. The preview might show errors when visiting different pages and that's due to the server hitting its limits. It should eventually load after some time. (FIXED: changed to main server)
+
+## Issues
+
+1. Fix CORS
+2. High response times for match history endpoint. (migrated server and reduced to 10 matches per request)
+3. Versioning endpoint might throw error?
 
 ## Disclaimer
 This project is isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.

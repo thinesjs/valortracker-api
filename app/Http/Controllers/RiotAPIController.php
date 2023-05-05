@@ -248,4 +248,10 @@ class RiotAPIController extends Controller
         $preGameLock = $this->valorClient->preGameLockAgent($request->matchId, $request->agentId);
         if(!empty($preGameLock) && !isset($preGameLock->errorCode)) return response()->json(['status' => 'success', 'data' => $preGameLock], 200); else return response()->json(['status' => 'error', 'data' => 'invalid access token'], 401);
     }
+
+    // public function getRankImage(Request $request)
+    // {
+    //     $image = $this->utils->getRankImage($request->tierId);
+    //     if(!$image) return $image;
+    // }
 }
