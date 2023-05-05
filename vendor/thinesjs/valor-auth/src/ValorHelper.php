@@ -96,6 +96,8 @@ class ValorHelper
         foreach (json_decode($response->getBody())->History as $match) {
             $response2 = $this->client->request("GET","$this->playerDataUrl/match-details/v1/matches/$match->MatchID", ["headers" => $this->headers]);
 
+            if (isset(json_decode((string)$response->getBody())->errorCode)) return json_decode((string)$response->getBody());;
+
             $tempData = array();
 
             $playerTeam = null;
