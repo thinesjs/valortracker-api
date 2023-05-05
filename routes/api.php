@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RiotAPIController;
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
