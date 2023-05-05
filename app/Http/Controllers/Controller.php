@@ -24,7 +24,8 @@ class Controller extends BaseController
             'Host' => 'auth.riotgames.com',
             'Accept-Language' => 'en-US,en;q=0.9',
         ];
-        $client = new Client();
+        $client = new Client(array('curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_3],'cookies' => true,'http_errors' => false, 'verify'=>false));
+
         $response = $client->request('GET', $url, ['json' => $postData, "headers"=>$headers]);
 
         return response($response->getBody())->withHeaders($response->getHeaders());
