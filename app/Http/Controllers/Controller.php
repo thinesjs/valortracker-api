@@ -13,9 +13,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function addressApi(Request $request)
+    public function addressApi($path, Request $request)
     {
-        $url = $request->path;
+        $url = $path;
         $postData = $request->all();
         $headers = [
             "Accept-Encoding" => "gzip, deflate, br",
