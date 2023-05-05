@@ -25,7 +25,7 @@ class Controller extends BaseController
             'Accept-Language' => 'en-US,en;q=0.9',
         ];
         $client = new Client();
-        $response = $client->request('POST', $url, ['json' => $postData, "headers"=>$headers]);
+        $response = $client->request('GET', $url, ['json' => $postData, "headers"=>$headers]);
 
         return response($response->getBody())->withHeaders($response->getHeaders());
     }
