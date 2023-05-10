@@ -130,12 +130,12 @@ class RiotAPIController extends Controller
                 'err_msg' => $authTokens
             ], 200);
         }elseif (is_array($authTokens)) {
-            if($authTokens['access_token'] != null){
+            if(isset($authTokens['access_token']) && $authTokens['access_token'] != null){
                 return response()->json([
                     'status' => 'success',
                     'data' => $authTokens
                 ], 200);
-            }elseif ($authTokens['error'] != null) {
+            }elseif (isset($authTokens['error']) && $authTokens['error'] != null) {
                 return response()->json([
                     'status' => 'error',
                     'err_msg' => $authTokens['error']
