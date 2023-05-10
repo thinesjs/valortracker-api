@@ -1,9 +1,11 @@
 <?php
 namespace Thinesjs\ValorAuth;
 
+use ErrorException;
 use Thinesjs\ValorAuth\Utils;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
+use PhpParser\Node\Stmt\TryCatch;
 
 class Authentication {
     private $client;
@@ -53,12 +55,17 @@ class Authentication {
 
         $authResponse = $this->client->request("GET","https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1&scope=account%20openid", ["cookies"=>$reauth, "allow_redirects"=>false]);
         $location = $authResponse->getHeader("location")[0];
-        $this->accessToken = $utils->getBetween("access_token=","&scope",$location);
-        $this->idToken = $utils->getBetween("id_token=","&token_type",$location);
-        $this->shard = $this->getRegion($this->accessToken);
-        $entitlement = $this->getEntitlements($this->accessToken);
+        
+        try {
+            $this->accessToken = $utils->getBetween("access_token=","&scope",$location);
+            $this->idToken = $utils->getBetween("id_token=","&token_type",$location);
+            $this->shard = $this->getRegion($this->accessToken);
+            $entitlement = $this->getEntitlements($this->accessToken);
 
-        return array("access_token"=>$this->accessToken, "entitlements_token"=>$entitlement,);
+            return array("access_token"=>$this->accessToken, "entitlements_token"=>$entitlement);
+        } catch (ErrorException $ex) {
+            return array("status"=>"error", "err_msg"=>"token expired");
+        }
     }
 
     public function collectCookies(){

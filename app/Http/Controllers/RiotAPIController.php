@@ -124,6 +124,8 @@ class RiotAPIController extends Controller
         $valorAuth = new Authentication();
         $authTokens = $valorAuth->reAuth($request->ssid);
 
+        dd($authTokens);
+
         if($authTokens == "2FA"){
             return response()->json([
                 'status' => '2fa',
