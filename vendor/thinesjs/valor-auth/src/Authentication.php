@@ -75,7 +75,7 @@ class Authentication {
         $utils = new Utils();
         $addr = $this->address;
 
-        $postData = json_decode('{"type":"auth", "username":"'.$this->username.'", "password":"'.$this->password.'", "remember":'.json_encode($this->remember).'}');
+        $postData = json_decode('{"type":"auth", "username":"'.$this->username.'", "password":"'.$this->password.'", "remember":"'.$this->remember.'"}');
         $response = $this->client->request("PUT","https://$addr/api/v1/authorization",["json"=>$postData, "cookies"=>$session, "headers"=>$this->headers]);
         if(isset(json_decode((string) $response->getBody(),true)["error"])) return json_decode((string) $response->getBody());
         if (json_decode((string)$response->getBody())->type == "multifactor")
