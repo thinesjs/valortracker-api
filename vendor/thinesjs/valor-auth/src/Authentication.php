@@ -64,7 +64,7 @@ class Authentication {
 
             return array("access_token"=>$this->accessToken, "entitlements_token"=>$entitlement);
         } catch (ErrorException $ex) {
-            return array("status"=>"error", "err_msg"=>"token expired");
+            return array("status"=>"error", "error"=>"token expired");
         }
     }
 
